@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TableComp from "./components/table";
+import data from "./components/data/usersData.json";
+import AddModal from "./components/modal/addModal";
+import { useState } from "react";
 
 function App() {
+  const [users, setUsers] = useState(data);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <br />
+      <AddModal users={users} setUsers={setUsers} />
+      <br />
+      <br />
+      <TableComp users={users} setUsers={setUsers} />
     </div>
   );
 }
