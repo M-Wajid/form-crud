@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Table } from "react-bootstrap";
 import DeleteModal from "../modal/deleteModal";
 import EditModal from "../modal/editModal";
 
@@ -39,7 +38,7 @@ const TableComp = ({ users, setUsers }) => {
         users={users}
         setUsers={setUsers}
       />
-      <Table bordered hover>
+      <table className="styled-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -69,18 +68,18 @@ const TableComp = ({ users, setUsers }) => {
                 ))}
               </td>
               <td>
-                <Button
-                  style={{ marginRight: "10px" }}
+                <button
+                  className="buttonClass"
                   onClick={() => edit(item, i)}
                 >
                   Edit
-                </Button>
-                <Button onClick={() => deleteFunc(i)}>Delete</Button>
+                </button>
+                <button className="buttonClass" onClick={() => deleteFunc(i)}>Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
 };
