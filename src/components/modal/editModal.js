@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { FormCheck } from "react-bootstrap";
 import { useState } from "react";
+import { validate } from "../helper";
 
 const EditModal = (props) => {
   let { show, setShow, editItem, setEditItem, editIndex, users, setUsers } =
@@ -12,6 +13,51 @@ const EditModal = (props) => {
     setShow(false)
     setError({});
   };
+
+  const validationData = [
+    {
+      name: "Name",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: "Please Enter a valid Name",
+    },
+    {
+      name: "Email",
+      regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      errorMessage: "Please Enter a valid Email",
+    },
+    {
+      name: "Password",
+      regex:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+      errorMessage:
+        "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    },
+    {
+      name: "ConfirmPassword",
+      regex:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+      errorMessage: "Password didn't Match",
+    },
+    {
+      name: "DoB",
+      regex: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/,
+      errorMessage: `Please enter your date of birth`,
+    },
+    {
+      name: "Gender",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: `Please select your gender`,
+    },
+    {
+      name: "Nationality",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: `Please select your nationality`,
+    },
+    {
+      name: "Skills",
+      errorMessage: `Please select atleast one skill`,
+    },
+  ];
 
   const onChangeHandler = (event) => {
     if (event.target.name === "Skills") {
@@ -42,39 +88,8 @@ const EditModal = (props) => {
     }
   };
 
-  const validate = () => {
-    let err = {};
-
-    if(editItem?.Name === ""){
-      err.Name = "Please Enter Name"
-    }
-    if (editItem?.Email === "") {
-      err.Email = `Please enter your email`;
-    }
-    if (editItem?.Password === "") {
-      err.Password = `Please enter your Password`;
-    }
-    if (editItem?.ConfirmPassword === "") {
-      err.ConfirmPassword = `Please confirm your password`;
-    }
-    if (editItem?.DoB === "") {
-      err.DoB = `Please enter your date of birth`;
-    }
-    if (editItem?.Gender === "") {
-      err.Gender = `Please select your gender`;
-    }
-    if (editItem?.Nationality === "") {
-      err.Nationality = `Please select your nationality`;
-    }
-    if (editItem?.Skills.length === 0) {
-      err.Skills = `Please select atleast one skill`;
-    }
-    setError({...err});
-    return (Object.keys(err).length === 0);
-  }
-
   const onClickHandler = () => {
-    const isValid = validate();
+    const isValid = validate(validationData, editItem, setError);
     if (isValid){
       let tempUsers = [...users];
       tempUsers.splice(editIndex, 1, editItem);

@@ -3,8 +3,54 @@ import { FormCheck } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { validate } from "../helper";
 
 const AddModal = ({ users, setUsers }) => {
+  const validationData = [
+    {
+      name: "Name",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: "Please Enter a valid Name",
+    },
+    {
+      name: "Email",
+      regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      errorMessage: "Please Enter a valid Email",
+    },
+    {
+      name: "Password",
+      regex:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+      errorMessage:
+        "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    },
+    {
+      name: "ConfirmPassword",
+      regex:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+      errorMessage: "Password didn't Match",
+    },
+    {
+      name: "DoB",
+      regex: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/,
+      errorMessage: `Please enter your date of birth`,
+    },
+    {
+      name: "Gender",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: `Please select your gender`,
+    },
+    {
+      name: "Nationality",
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+      errorMessage: `Please select your nationality`,
+    },
+    {
+      name: "Skills",
+      errorMessage: `Please select atleast one skill`,
+    },
+  ];
+
   const [show, setShow] = useState(false);
   const [newUser, setNewUser] = useState({});
   const [error, setError] = useState({});
@@ -48,59 +94,8 @@ const AddModal = ({ users, setUsers }) => {
     }
   };
 
-  const validate = () => {
-    let err = {};
-    if (!newUser.Name || newUser?.Name === "") {
-      err.Name = `Please enter your name`;
-    }
-
-    if (!newUser.Email || newUser?.Email === "") {
-      err.Email = `Please enter your email`;
-    }else{
-      let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-      if(!regex.test(newUser.Email)){
-        err.Email = `Please enter a valid email`;
-      }
-    }
-
-    if (!newUser.Password || newUser?.Password === "") {
-      err.Password = `Please enter your Password`;
-    }else{
-      let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/
-      if(!regex.test(newUser.Password)){
-        err.Password = "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-      }
-    }
-
-    if (!newUser.ConfirmPassword || newUser?.ConfirmPassword === "") {
-      err.ConfirmPassword = `Please confirm your password`;
-    }else if(newUser.Password !== newUser.ConfirmPassword){
-      err.ConfirmPassword = "Password didn't Match"
-    }
-
-    if (!newUser.DoB || newUser?.DoB === "") {
-      err.DoB = `Please enter your date of birth`;
-    }
-
-    if (!newUser.Gender || newUser?.Gender === "") {
-      err.Gender = `Please select your gender`;
-    }
-
-    if (!newUser.Nationality || newUser?.Nationality === "") {
-      err.Nationality = `Please select your nationality`;
-    }
-
-    if (!newUser.Skills || newUser?.Skills.length === 0) {
-      err.Skills = `Please select atleast one skill`;
-    }
-    
-    setError({ ...err });
-    console.log(err);
-    return Object.keys(err).length === 0;
-  };
-
   const onClickHandler = () => {
-    const isValid = validate();
+    const isValid = validate(validationData, newUser, setError);
     console.log(newUser);
     if (isValid) {
       setUsers([...users, newUser]);
