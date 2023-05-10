@@ -87,8 +87,8 @@ const GenericForm = (props) => {
                   <Form.Check
                   name={field?.name}
                   type={field?.type}
-                  value={user&& user[field?.name]}
-                  checked={user&& user[field?.name] === item.value}
+                  value={item?.value}
+                  checked={user&& user[field?.name] === item?.value}
                   label={item?.label}
                   onChange={changeHandler}
                   onBlur={blurHandler}
@@ -108,6 +108,7 @@ const GenericForm = (props) => {
                   <Form.Check
                   name={field?.name}
                   type={field?.type}
+                  value={item?.value}
                   checked={user && user?.[field?.name].includes(item?.value)}
                   label={item?.label}
                   onChange={changeHandler}
