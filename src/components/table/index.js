@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DeleteModal from "../modal/deleteModal";
-import EditModal from "../modal/editModal";
+import EditUser from "../editUser";
+import DeleteUser from './../deleteUser/index';
 
 const TableComp = ({ users, setUsers }) => {
   const [editShow, setEditShow] = useState(false);
@@ -22,14 +22,14 @@ const TableComp = ({ users, setUsers }) => {
 
   return (
     <>
-      <DeleteModal
+      <DeleteUser
         show={deleteShow}
         setShow={setDeleteShow}
         currentUserIndex={deleteIndex}
         users={users}
         setUsers={setUsers}
       />
-      <EditModal
+      <EditUser
         show={editShow}
         setShow={setEditShow}
         editItem={editItem}

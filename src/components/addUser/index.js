@@ -1,18 +1,13 @@
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-import { validate } from "../helper";
-import GenericForm from "../form";
-import {fields} from "./../data/fieldsData"
+import React, { useState } from 'react'
+import GenericModal from '../generic/modal'
+import GenericForm from '../generic/form';
+import {fields} from "../../data/fieldsData";
+import { validate } from './../helper/index';
 
-const EditModal = (props) => {
-  let { show, setShow, editItem, setEditItem, editIndex, users, setUsers } =
-    props;
+const AddUser = ({users,setUsers}) => {
+  const [show, setShow] = useState(false);
+  const [newUser, setNewUser] = useState({});
   const [error, setError] = useState({});
-  const handleClose = () => {
-    setShow(false)
-    setError({});
-  };
 
   const validationData = [
     {
@@ -59,17 +54,35 @@ const EditModal = (props) => {
     },
   ];
 
+  const handleClose = () => {
+    setNewUser({});
+    setError({});
+    setShow(false);
+  }
+
+  const onClickHandler = () => {
+    const isValid = validate(validationData, newUser, setError);
+    console.log(newUser);
+    if (isValid) {
+      setUsers([...users, newUser]);
+      handleClose();
+    }
+  };
+
   const changeHandler = (event) => {
     if (event.target.name === "skills") {
-      let temp = { ...editItem };
+      let checkTemp = { ...newUser };
       event.target.checked
-        ? (temp.skills = temp.skills.concat([event.target.value]))
-        : // ? temp.Skills.push(event.target.value)
-          (temp.skills = temp.skills.filter((el) => el !== event.target.value));
-      setEditItem(temp);
+        ? !checkTemp.skills
+          ? (checkTemp.skills = [event.target.value])
+          : checkTemp.skills.push(event.target.value)
+        : (checkTemp.skills = checkTemp.skills.filter(
+            (el) => el !== event.target.value
+          ));
+      setNewUser(checkTemp);
     } else {
-      setEditItem({
-        ...editItem,
+      setNewUser({
+        ...newUser,
         [event.target.name]: event.target.value,
       });
     }
@@ -88,36 +101,21 @@ const EditModal = (props) => {
     }
   };
 
-  const onClickHandler = () => {
-    const isValid = validate(validationData, editItem, setError);
-    if (isValid){
-      let tempUsers = [...users];
-      tempUsers.splice(editIndex, 1, editItem);
-      setUsers(tempUsers);
-      // setEditItem();
-      handleClose();
-    }
-  };
-
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>User Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <GenericForm fields={fields} changeHandler={changeHandler} blurHandler={blurHandler} error={error} user={editItem} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={onClickHandler}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+    <GenericModal
+      show={show}
+      title="User Data"
+      body={<GenericForm fields={fields} changeHandler={changeHandler} blurHandler={blurHandler} error={error}/>}
+      mainFunc={onClickHandler}
+      closeFunc={handleClose}
+    />
+      <button className="buttonClass" onClick={() => setShow(true)}>
+        Add
+      </button>
     </>
-  );
-};
-export default EditModal;
+    
+  )
+}
+
+export default AddUser
