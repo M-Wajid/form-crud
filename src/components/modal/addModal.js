@@ -8,45 +8,45 @@ import { validate } from "../helper";
 const AddModal = ({ users, setUsers }) => {
   const validationData = [
     {
-      name: "Name",
+      name: "name",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: "Please Enter a valid Name",
     },
     {
-      name: "Email",
+      name: "email",
       regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       errorMessage: "Please Enter a valid Email",
     },
     {
-      name: "Password",
+      name: "password",
       regex:
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
       errorMessage:
         "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
     },
     {
-      name: "ConfirmPassword",
-      regex:
+      name: "confirmPassword",
+      regex: 
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
       errorMessage: "Password didn't Match",
     },
     {
-      name: "DoB",
+      name: "dateOfBirth",
       regex: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/,
       errorMessage: `Please enter your date of birth`,
     },
     {
-      name: "Gender",
+      name: "gender",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: `Please select your gender`,
     },
     {
-      name: "Nationality",
+      name: "nationality",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: `Please select your nationality`,
     },
     {
-      name: "Skills",
+      name: "skills",
       errorMessage: `Please select atleast one skill`,
     },
   ];
@@ -63,13 +63,13 @@ const AddModal = ({ users, setUsers }) => {
   };
 
   const onChangeHandler = (event) => {
-    if (event.target.name === "Skills") {
+    if (event.target.name === "skills") {
       let checkTemp = { ...newUser };
       event.target.checked
-        ? !checkTemp.Skills
-          ? (checkTemp.Skills = [event.target.value])
-          : checkTemp.Skills.push(event.target.value)
-        : (checkTemp.Skills = checkTemp.Skills.filter(
+        ? !checkTemp.skills
+          ? (checkTemp.skills = [event.target.value])
+          : checkTemp.skills.push(event.target.value)
+        : (checkTemp.skills = checkTemp.skills.filter(
             (el) => el !== event.target.value
           ));
       setNewUser(checkTemp);
@@ -120,28 +120,28 @@ const AddModal = ({ users, setUsers }) => {
               <Form.Label>Name</Form.Label>
               <input
                 className="form-control"
-                name="Name"
+                name="name"
                 type="text"
                 placeholder="John"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Name && (
-                <Form.Label className="errorStyle">{error.Name}</Form.Label>
+              {error && error.name && (
+                <Form.Label className="errorStyle">{error.name}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <input
                 className="form-control"
-                name="Email"
+                name="email"
                 type="email"
                 placeholder="john@email.com"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Email && (
-                <Form.Label className="errorStyle">{error.Email}</Form.Label>
+              {error && error.email && (
+                <Form.Label className="errorStyle">{error.email}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
@@ -149,28 +149,28 @@ const AddModal = ({ users, setUsers }) => {
               <input
                 className="form-control"
                 type="text"
-                name="Password"
-                placeholder="John123"
+                name="password"
+                placeholder="John@123"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Password && (
-                <Form.Label className="errorStyle">{error.Password}</Form.Label>
+              {error && error.password && (
+                <Form.Label className="errorStyle">{error.password}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Confirm Password</Form.Label>
               <input
                 className="form-control"
-                name="ConfirmPassword"
+                name="confirmPassword"
                 type="text"
-                placeholder="John123"
+                placeholder="John@123"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.ConfirmPassword && (
+              {error && error.confirmPassword && (
                 <Form.Label className="errorStyle">
-                  {error.ConfirmPassword}
+                  {error.confirmPassword}
                 </Form.Label>
               )}
             </Form.Group>
@@ -178,20 +178,20 @@ const AddModal = ({ users, setUsers }) => {
               <Form.Label>Date of Birth</Form.Label>
               <input
                 className="form-control"
-                name="DoB"
+                name="dateOfBirth"
                 type="date"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.DoB && (
-                <Form.Label className="errorStyle">{error.DoB}</Form.Label>
+              {error && error.dateOfBirth && (
+                <Form.Label className="errorStyle">{error.dateOfBirth}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Gender</Form.Label>
               <FormCheck
                 type="radio"
-                name="Gender"
+                name="gender"
                 label="Male"
                 value="Male"
                 onChange={onChangeHandler}
@@ -199,21 +199,21 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="radio"
-                name="Gender"
+                name="gender"
                 label="Female"
                 value="Female"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Gender && (
-                <Form.Label className="errorStyle">{error.Gender}</Form.Label>
+              {error && error.gender && (
+                <Form.Label className="errorStyle">{error.gender}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Nationality</Form.Label>
               <select
                 className="form-control"
-                name="Nationality"
+                name="nationality"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               >
@@ -223,9 +223,9 @@ const AddModal = ({ users, setUsers }) => {
                 <option value="Indian">Indian</option>
                 <option value="Pakistani">Pakistani</option>
               </select>
-              {error && error.Nationality && (
+              {error && error.nationality && (
                 <Form.Label className="errorStyle">
-                  {error.Nationality}
+                  {error.nationality}
                 </Form.Label>
               )}
             </Form.Group>
@@ -233,7 +233,7 @@ const AddModal = ({ users, setUsers }) => {
               <Form.Label>Skills</Form.Label>
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="React.js"
                 value="React.js"
                 onChange={onChangeHandler}
@@ -241,7 +241,7 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="JavaScript"
                 value="JavaScript"
                 onChange={onChangeHandler}
@@ -249,7 +249,7 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="HTML"
                 value="HTML"
                 onChange={onChangeHandler}
@@ -257,7 +257,7 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="CSS"
                 value="CSS"
                 onChange={onChangeHandler}
@@ -265,7 +265,7 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="Node.js"
                 value="Node.js"
                 onChange={onChangeHandler}
@@ -273,7 +273,7 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="Express.js"
                 value="Express.js"
                 onChange={onChangeHandler}
@@ -281,14 +281,14 @@ const AddModal = ({ users, setUsers }) => {
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="C++"
                 value="C++"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Skills && (
-                <Form.Label className="errorStyle">{error.Skills}</Form.Label>
+              {error && error.skills && (
+                <Form.Label className="errorStyle">{error.skills}</Form.Label>
               )}
             </Form.Group>
           </Form>

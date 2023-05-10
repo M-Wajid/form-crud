@@ -1,32 +1,32 @@
 [
   {
-    "Name": "Wajid",
-    "Email": "wajid@gmail.com",
-    "Password": "Wajid123",
-    "ConfirmPassword": "Wajid123",
-    "DoB": "2000-02-18",
-    "Gender": "Male",
-    "Nationality": "Pakistani",
-    "Skills": ["JavaScript", "C++"]
+    "name": "Wajid",
+    "email": "wajid@gmail.com",
+    "password": "Wajid123",
+    "confirmPassword": "Wajid123",
+    "dateOfBirth": "2000-02-18",
+    "gender": "Male",
+    "nationality": "Pakistani",
+    "skills": ["JavaScript", "C++"]
   },
   {
-    "Name": "ABC",
-    "Email": "abc@gmail.com",
-    "Password": "ABC123",
-    "ConfirmPassword": "ABC123",
-    "DoB": "2001-01-11",
-    "Gender": "Male",
-    "Nationality": "Pakistani",
-    "Skills": ["React.js", "JavaScript", "HTML", "CSS"]
+    "name": "ABC",
+    "email": "abc@gmail.com",
+    "password": "ABC123",
+    "confirmPassword": "ABC123",
+    "dateOfBirth": "2001-01-11",
+    "gender": "Male",
+    "nationality": "Pakistani",
+    "skills": ["React.js", "JavaScript", "HTML", "CSS"]
   },
   {
-    "Name": "XYZ",
-    "Email": "xyz@gmail.com",
-    "Password": "XYZ123",
-    "ConfirmPassword": "XYZ123",
-    "DoB": "2002-02-22",
-    "Gender": "Male",
-    "Nationality": "Pakistani",
-    "Skills": ["Node.js", "Express.js", "JavaScript"]
+    "name": "XYZ",
+    "email": "xyz@gmail.com",
+    "password": "XYZ123",
+    "confirmPassword": "XYZ123",
+    "dateOfBirth": "2002-02-22",
+    "gender": "Male",
+    "nationality": "Pakistani",
+    "skills": ["Node.js", "Express.js", "JavaScript"]
   }
 ]

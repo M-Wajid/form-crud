@@ -55,15 +55,15 @@ const TableComp = ({ users, setUsers }) => {
         <tbody>
           {users.map((item, i) => (
             <tr>
-              <td>{item.Name}</td>
-              <td>{item.Email}</td>
-              <td>{item.Password}</td>
-              <td>{item.ConfirmPassword}</td>
-              <td>{item.DoB}</td>
-              <td>{item.Gender}</td>
-              <td>{item.Nationality}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.password}</td>
+              <td>{item.confirmPassword}</td>
+              <td>{item.dateOfBirth}</td>
+              <td>{item.gender}</td>
+              <td>{item.nationality}</td>
               <td>
-                {item.Skills.map((skill) => (
+                {item.skills.map((skill) => (
                   <>{skill}, </>
                 ))}
               </td>

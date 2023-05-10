@@ -16,56 +16,56 @@ const EditModal = (props) => {
 
   const validationData = [
     {
-      name: "Name",
+      name: "name",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: "Please Enter a valid Name",
     },
     {
-      name: "Email",
+      name: "email",
       regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       errorMessage: "Please Enter a valid Email",
     },
     {
-      name: "Password",
+      name: "password",
       regex:
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
       errorMessage:
         "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
     },
     {
-      name: "ConfirmPassword",
-      regex:
+      name: "confirmPassword",
+      regex: 
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
       errorMessage: "Password didn't Match",
     },
     {
-      name: "DoB",
+      name: "dateOfBirth",
       regex: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/,
       errorMessage: `Please enter your date of birth`,
     },
     {
-      name: "Gender",
+      name: "gender",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: `Please select your gender`,
     },
     {
-      name: "Nationality",
+      name: "nationality",
       regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
       errorMessage: `Please select your nationality`,
     },
     {
-      name: "Skills",
+      name: "skills",
       errorMessage: `Please select atleast one skill`,
     },
   ];
 
   const onChangeHandler = (event) => {
-    if (event.target.name === "Skills") {
+    if (event.target.name === "skills") {
       let temp = { ...editItem };
       event.target.checked
-        ? (temp.Skills = temp.Skills.concat([event.target.value]))
+        ? (temp.skills = temp.skills.concat([event.target.value]))
         : // ? temp.Skills.push(event.target.value)
-          (temp.Skills = temp.Skills.filter((el) => el !== event.target.value));
+          (temp.skills = temp.skills.filter((el) => el !== event.target.value));
       setEditItem(temp);
     } else {
       setEditItem({
@@ -111,28 +111,28 @@ const EditModal = (props) => {
               <Form.Label>Name</Form.Label>
               <input
                 className="form-control"
-                name="Name"
+                name="name"
                 type="text"
-                defaultValue={editItem?.Name}
+                defaultValue={editItem?.name}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Name && (
-                <Form.Label className="errorStyle">{error.Name}</Form.Label>
+              {error && error.name && (
+                <Form.Label className="errorStyle">{error.name}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <input
                 className="form-control"
-                name="Email"
+                name="email"
                 type="email"
-                defaultValue={editItem?.Email}
+                defaultValue={editItem?.email}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Email && (
-                <Form.Label className="errorStyle">{error.Email}</Form.Label>
+              {error && error.email && (
+                <Form.Label className="errorStyle">{error.email}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
@@ -140,28 +140,28 @@ const EditModal = (props) => {
               <input
                 className="form-control"
                 type="text"
-                name="Password"
-                defaultValue={editItem?.Password}
+                name="password"
+                defaultValue={editItem?.password}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Password && (
-                <Form.Label className="errorStyle">{error.Password}</Form.Label>
+              {error && error.password && (
+                <Form.Label className="errorStyle">{error.password}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Confirm Password</Form.Label>
               <input
                 className="form-control"
-                name="ConfirmPassword"
+                name="confirmPassword"
                 type="text"
-                defaultValue={editItem?.ConfirmPassword}
+                defaultValue={editItem?.confirmPassword}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.ConfirmPassword && (
+              {error && error.confirmPassword && (
                 <Form.Label className="errorStyle">
-                  {error.ConfirmPassword}
+                  {error.confirmPassword}
                 </Form.Label>
               )}
             </Form.Group>
@@ -169,46 +169,46 @@ const EditModal = (props) => {
               <Form.Label>Date of Birth</Form.Label>
               <input
                 className="form-control"
-                name="DoB"
+                name="dateOfBirth"
                 type="date"
-                defaultValue={editItem?.DoB}
+                defaultValue={editItem?.dateOfBirth}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.DoB && (
-                <Form.Label className="errorStyle">{error.DoB}</Form.Label>
+              {error && error.dateOfBirth && (
+                <Form.Label className="errorStyle">{error.dateOfBirth}</Form.Label>
               )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Gender</Form.Label>
               <FormCheck
                 type="radio"
-                name="Gender"
+                name="gender"
                 label="Male"
                 value="Male"
-                checked={editItem?.Gender === "Male"}
+                checked={editItem?.gender === "Male"}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="radio"
-                name="Gender"
+                name="gender"
                 label="Female"
                 value="Female"
-                checked={editItem?.Gender === "Female"}
+                checked={editItem?.gender === "Female"}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
             </Form.Group>
-            {error && error.Gender && (
-              <Form.Label className="errorStyle">{error.Gender}</Form.Label>
+            {error && error.gender && (
+              <Form.Label className="errorStyle">{error.gender}</Form.Label>
             )}
             <Form.Group className="mb-3">
               <Form.Label>Nationality</Form.Label>
               <select
-                value={editItem?.Nationality}
+                value={editItem?.nationality}
                 className="form-control"
-                name="Nationality"
+                name="nationality"
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               >
@@ -218,9 +218,9 @@ const EditModal = (props) => {
                 <option value="Indian">Indian</option>
                 <option value="Pakistani">Pakistani</option>
               </select>
-              {error && error.Nationality && (
+              {error && error.nationality && (
                 <Form.Label className="errorStyle">
-                  {error.Nationality}
+                  {error.nationality}
                 </Form.Label>
               )}
             </Form.Group>
@@ -228,78 +228,78 @@ const EditModal = (props) => {
               <Form.Label>Skills</Form.Label>
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="React.js"
                 value="React.js"
-                checked={editItem?.Skills.includes("React.js")}
+                checked={editItem?.skills.includes("React.js")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="JavaScript"
                 value="JavaScript"
-                checked={editItem?.Skills.includes("JavaScript")}
+                checked={editItem?.skills.includes("JavaScript")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="HTML"
                 value="HTML"
-                checked={editItem?.Skills.includes("HTML")}
+                checked={editItem?.skills.includes("HTML")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="CSS"
                 value="CSS"
-                checked={editItem?.Skills.includes("CSS")}
+                checked={editItem?.skills.includes("CSS")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="Node.js"
                 value="Node.js"
-                checked={editItem?.Skills.includes("Node.js")}
+                checked={editItem?.skills.includes("Node.js")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="Express.js"
                 value="Express.js"
-                checked={editItem?.Skills.includes("Express.js")}
+                checked={editItem?.skills.includes("Express.js")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="C++"
                 value="C++"
-                checked={editItem?.Skills.includes("C++")}
+                checked={editItem?.skills.includes("C++")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
               <FormCheck
                 type="checkbox"
-                name="Skills"
+                name="skills"
                 label="None"
                 value="None"
-                checked={editItem?.Skills.includes("None")}
+                checked={editItem?.skills.includes("None")}
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
               />
-              {error && error.Skills && (
-                <Form.Label className="errorStyle">{error.Skills}</Form.Label>
+              {error && error.skills && (
+                <Form.Label className="errorStyle">{error.skills}</Form.Label>
               )}
             </Form.Group>
           </Form>
