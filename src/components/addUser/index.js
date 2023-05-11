@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import GenericModal from '../generic/modal'
-import GenericForm from '../generic/form';
-import {fields} from "../../data/fieldsData";
-import { validate } from './../helper/index';
+import React, { useState } from "react";
+import GenericModal from "../generic/modal";
+import GenericForm from "../generic/form";
+import { fields } from "../../data/fieldsData";
+import { settingOnBlurFormData, settingOnChangeFormData, validate } from "./../helper/index";
 
-const AddUser = ({users,setUsers}) => {
+const AddUser = ({ users, setUsers }) => {
   const [show, setShow] = useState(false);
   const [newUser, setNewUser] = useState({});
   const [error, setError] = useState({});
@@ -29,7 +29,7 @@ const AddUser = ({users,setUsers}) => {
   //   },
   //   {
   //     name: "confirmPassword",
-  //     regex: 
+  //     regex:
   //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
   //     errorMessage: "Password didn't Match",
   //   },
@@ -58,7 +58,7 @@ const AddUser = ({users,setUsers}) => {
     setNewUser({});
     setError({});
     setShow(false);
-  }
+  };
 
   const onClickHandler = () => {
     const isValid = validate(fields, newUser, setError);
@@ -69,53 +69,59 @@ const AddUser = ({users,setUsers}) => {
     }
   };
 
-  const changeHandler = (event) => {
-    if (event.target.name === "skills") {
-      let checkTemp = { ...newUser };
-      event.target.checked
-        ? !checkTemp.skills
-          ? (checkTemp.skills = [event.target.value])
-          : checkTemp.skills.push(event.target.value)
-        : (checkTemp.skills = checkTemp.skills.filter(
-            (el) => el !== event.target.value
-          ));
-      setNewUser(checkTemp);
-    } else {
-      setNewUser({
-        ...newUser,
-        [event.target.name]: event.target.value,
-      });
-    }
-  };
+  // const changeHandler = (event) => {
+  //   if (event.target.name === "skills") {
+  //     let checkTemp = { ...newUser };
+  //     event.target.checked
+  //       ? !checkTemp.skills
+  //         ? (checkTemp.skills = [event.target.value])
+  //         : checkTemp.skills.push(event.target.value)
+  //       : (checkTemp.skills = checkTemp.skills.filter(
+  //           (el) => el !== event.target.value
+  //         ));
+  //     setNewUser(checkTemp);
+  //   } else {
+  //     setNewUser({
+  //       ...newUser,
+  //       [event.target.name]: event.target.value,
+  //     });
+  //   }
+  // };
 
-  const blurHandler = (event) => {
-    if (!event.target.value.trim()) {
-      setError({
-        ...error,
-        [event.target.name]: `Please enter ${event.target.name}`,
-      });
-    } else {
-      const tempError = { ...error };
-      delete tempError[event.target.name];
-      setError(tempError);
-    }
-  };
+  // const blurHandler = (event) => {
+  //   if (!event.target.value.trim()) {
+  //     setError({
+  //       ...error,
+  //       [event.target.name]: `blur Please enter ${event.target.name}`,
+  //     });
+  //   } else {
+  //     const tempError = { ...error };
+  //     delete tempError[event.target.name];
+  //     setError(tempError);
+  //   }
+  // };
 
   return (
     <>
-    <GenericModal
-      show={show}
-      title="User Data"
-      body={<GenericForm fields={fields} changeHandler={changeHandler} blurHandler={blurHandler} error={error}/>}
-      mainFunc={onClickHandler}
-      closeFunc={handleClose}
-    />
+      <GenericModal
+        show={show}
+        title="User Data"
+        body={
+          <GenericForm
+            fields={fields}
+            changeHandler={(event) => settingOnChangeFormData(event, newUser, setNewUser)}
+            blurHandler={(event) => settingOnBlurFormData(event, error, setError)}
+            error={error}
+          />
+        }
+        mainFunc={onClickHandler}
+        closeFunc={handleClose}
+      />
       <button className="buttonClass" onClick={() => setShow(true)}>
         Add
       </button>
     </>
-    
-  )
-}
+  );
+};
 
-export default AddUser
+export default AddUser;

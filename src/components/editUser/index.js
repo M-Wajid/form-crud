@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import GenericForm from '../generic/form'
-import GenericModal from './../generic/modal/index';
-import {fields} from "../../data/fieldsData";
-import { validate } from '../helper';
+import { useState } from "react";
+import GenericForm from "../generic/form";
+import GenericModal from "./../generic/modal/index";
+import { fields } from "../../data/fieldsData";
+import { settingOnBlurFormData, settingOnChangeFormData, validate } from "../helper";
 
 const EditUser = (props) => {
-  const {show, setShow, editItem, setEditItem, editIndex, users, setUsers } = props;
+  const { show, setShow, editItem, setEditItem, editIndex, users, setUsers } =
+    props;
   const [error, setError] = useState({});
   // const validationData = [
   //   {
@@ -27,7 +28,7 @@ const EditUser = (props) => {
   //   },
   //   {
   //     name: "confirmPassword",
-  //     regex: 
+  //     regex:
   //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
   //     errorMessage: "Password didn't Match",
   //   },
@@ -55,11 +56,11 @@ const EditUser = (props) => {
   const handleClose = () => {
     setShow(false);
     setError({});
-  }
+  };
 
   const onClickHandler = () => {
     const isValid = validate(fields, editItem, setError);
-    if (isValid){
+    if (isValid) {
       let tempUsers = [...users];
       tempUsers.splice(editIndex, 1, editItem);
       setUsers(tempUsers);
@@ -67,44 +68,52 @@ const EditUser = (props) => {
     }
   };
 
-  const changeHandler = (event) => {
-    if (event.target.name === "skills") {
-      let temp = { ...editItem };
-      event.target.checked
-        ? (temp.skills = temp.skills.concat([event.target.value]))
-        : // ? temp.Skills.push(event.target.value)
-          (temp.skills = temp.skills.filter((el) => el !== event.target.value));
-      setEditItem(temp);
-    } else {
-      setEditItem({
-        ...editItem,
-        [event.target.name]: event.target.value,
-      });
-    }
-  };
+  // const changeHandler = (event) => {
+  //   if (event.target.name === "skills") {
+  //     let temp = { ...editItem };
+  //     event.target.checked
+  //       ? (temp.skills = temp.skills.concat([event.target.value]))
+  //       : // ? temp.Skills.push(event.target.value)
+  //         (temp.skills = temp.skills.filter((el) => el !== event.target.value));
+  //     setEditItem(temp);
+  //   } else {
+  //     setEditItem({
+  //       ...editItem,
+  //       [event.target.name]: event.target.value,
+  //     });
+  //   }
+  // };
 
-  const blurHandler = (event) => {
-    if (!event.target.value.trim()) {
-      setError({
-        ...error,
-        [event.target.name]: `Please enter ${event.target.name}`,
-      });
-    } else {
-      const tempError = { ...error };
-      delete tempError[event.target.name];
-      setError(tempError);
-    }
-  };
+  // const blurHandler = (event) => {
+  //   if (!event.target.value.trim()) {
+  //     setError({
+  //       ...error,
+  //       [event.target.name]: `Please enter ${event.target.name}`,
+  //     });
+  //   } else {
+  //     const tempError = { ...error };
+  //     delete tempError[event.target.name];
+  //     setError(tempError);
+  //   }
+  // };
 
   return (
-    <GenericModal 
+    <GenericModal
       show={show}
       title="User Data"
-      body={<GenericForm fields={fields} changeHandler={changeHandler} blurHandler={blurHandler} error={error} user={editItem}/>}
+      body={
+        <GenericForm
+          fields={fields}
+          changeHandler={(event) => settingOnChangeFormData(event, editItem, setEditItem)}
+          blurHandler={(event) => settingOnBlurFormData(event, error, setError)}
+          error={error}
+          user={editItem}
+        />
+      }
       mainFunc={onClickHandler}
       closeFunc={handleClose}
     />
-  )
-}
+  );
+};
 
-export default EditUser
+export default EditUser;

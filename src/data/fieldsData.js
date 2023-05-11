@@ -4,7 +4,7 @@ export const fields = [
     name: "name",
     type: "text",
     placeholder: "John",
-    regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+    regex: /^[a-zA-Z ]+$/,
     errorMessage: "Please Enter a valid Name",
   },
   {
@@ -46,7 +46,7 @@ export const fields = [
     title: "Gender",
     type: "radio",
     name: "gender",
-    regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+    regex: /^[a-zA-Z ]+$/,
     errorMessage: `Please select your gender`,
     options: [
       {
@@ -63,7 +63,7 @@ export const fields = [
     title: "Nationality",
     name: "nationality",
     type: "select",
-    regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+    regex: /^[a-zA-Z ]+$/,
     errorMessage: `Please select your nationality`,
     options: [
       {
