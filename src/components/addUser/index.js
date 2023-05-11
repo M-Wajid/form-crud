@@ -9,50 +9,50 @@ const AddUser = ({users,setUsers}) => {
   const [newUser, setNewUser] = useState({});
   const [error, setError] = useState({});
 
-  const validationData = [
-    {
-      name: "name",
-      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
-      errorMessage: "Please Enter a valid Name",
-    },
-    {
-      name: "email",
-      regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      errorMessage: "Please Enter a valid Email",
-    },
-    {
-      name: "password",
-      regex:
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
-      errorMessage:
-        "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-    },
-    {
-      name: "confirmPassword",
-      regex: 
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
-      errorMessage: "Password didn't Match",
-    },
-    {
-      name: "dateOfBirth",
-      regex: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/,
-      errorMessage: `Please enter your date of birth`,
-    },
-    {
-      name: "gender",
-      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
-      errorMessage: `Please select your gender`,
-    },
-    {
-      name: "nationality",
-      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
-      errorMessage: `Please select your nationality`,
-    },
-    {
-      name: "skills",
-      errorMessage: `Please select atleast one skill`,
-    },
-  ];
+  // const validationData = [
+  //   {
+  //     name: "name",
+  //     regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+  //     errorMessage: "Please Enter a valid Name",
+  //   },
+  //   {
+  //     name: "email",
+  //     regex: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+  //     errorMessage: "Please Enter a valid Email",
+  //   },
+  //   {
+  //     name: "password",
+  //     regex:
+  //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+  //     errorMessage:
+  //       "Invalid Password! , Password must contain minimum eight and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+  //   },
+  //   {
+  //     name: "confirmPassword",
+  //     regex: 
+  //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
+  //     errorMessage: "Password didn't Match",
+  //   },
+  //   {
+  //     name: "dateOfBirth",
+  //     regex: /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/,
+  //     errorMessage: `Please enter your date of birth`,
+  //   },
+  //   {
+  //     name: "gender",
+  //     regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+  //     errorMessage: `Please select your gender`,
+  //   },
+  //   {
+  //     name: "nationality",
+  //     regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g,
+  //     errorMessage: `Please select your nationality`,
+  //   },
+  //   {
+  //     name: "skills",
+  //     errorMessage: `Please select atleast one skill`,
+  //   },
+  // ];
 
   const handleClose = () => {
     setNewUser({});
@@ -61,7 +61,7 @@ const AddUser = ({users,setUsers}) => {
   }
 
   const onClickHandler = () => {
-    const isValid = validate(validationData, newUser, setError);
+    const isValid = validate(fields, newUser, setError);
     console.log(newUser);
     if (isValid) {
       setUsers([...users, newUser]);
